@@ -1,0 +1,98 @@
+//MY COMMANDS IN MySQL IMPLEMENTING THE NORTHWIND DATABASE
+
+1. SELECT * FROM northwind.customers;
+
+2. SELECT DISTINCT Country FROM customers;
+
+3. SELECT * FROM northwind.customers WHERE CustomerID LIKE 'BL%';
+
+4. SELECT * FROM northwind.orders
+   LIMIT 100;
+
+5. SELECT * FROM northwind.customers WHERE PostalCode="1010" OR
+   PostalCode="3012" OR
+   PostalCode="12209" OR
+   PostalCode="05023";
+
+6. SELECT * FROM northwind.orders WHERE ShipRegion IS NOT NULL;
+
+7. SELECT * FROM northwind.customers 
+   ORDER BY Country, City;
+
+8. INSERT INTO northwind.customers(CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, Country)
+   VALUES('CACTUS JACK', 'Jack Cactus', 'Cactus Cultivator', 99, 'Cactusville', 'New Zealand', 09897, 'Australia');
+
+9. UPDATE northwind.orders
+   SET 
+   ShipRegion='EuroZone'
+   WHERE ShipCountry='France';
+
+10. DELETE FROM northwind.`order details`
+    WHERE ProductID=1;
+
+11. SELECT 
+    AVG(Quantity) 'Average Quantity'
+    FROM
+    northwind.`order details`;
+
+	SELECT 
+        MIN(Quantity) 'Min Quantity'
+	FROM
+        northwind.`order details`;
+
+		SELECT 
+  	        MAX(Quantity) 'Max Quantity'
+		FROM
+ 	        northwind.`order details`;
+
+12. SELECT 
+    AVG(Quantity) 'Average Quantity'
+    FROM
+    northwind.`order details`
+    GROUP BY orderid;
+
+	SELECT 
+        MIN(Quantity) 'Min Quantity'
+	FROM
+        northwind.`order details`
+	GROUP BY orderid;
+	
+		SELECT 
+  	        MAX(Quantity) 'Max Quantity'
+		FROM
+ 	        northwind.`order details`
+		GROUP BY orderid;
+
+13. SELECT * FROM northwind.orders WHERE OrderID=10290;
+
+14. SELECT northwind.customers.CustomerID, northwind.orders.OrderID
+    FROM northwind.customers
+    LEFT JOIN northwind.orders ON northwind.customers.CustomerID = northwind.orders.OrderID
+    ORDER BY northwind.customers.CustomerID;
+	
+	SELECT northwind.customers.CustomerID, northwind.orders.OrderID
+	FROM northwind.customers
+	RIGHT JOIN northwind.orders ON northwind.customers.CustomerID = northwind.orders.OrderID
+	ORDER BY northwind.customers.CustomerID;
+
+		SELECT northwind.customers.ContactName, northwind.orders.OrderID
+		FROM northwind.customers
+		INNER JOIN northwind.orders ON northwind.customers.ContactName = northwind.orders.OrderID
+		ORDER BY northwind.customers.ContactName;
+
+15. SELECT northwind.orders.ShipCity, northwind.orders.ShipCountry
+    FROM northwind.orders
+    LEFT JOIN northwind.employees ON northwind.orders.ShipCity='England';
+
+16. SELECT orders.ShipName 
+    FROM orders 
+    LEFT JOIN `order details` ON orders.OrderID=`order details`.OrderID 
+    JOIN products ON `order details`.ProductID=products.ProductID 
+    WHERE products.Discontinued=1;
+
+17. SELECT employees.FirstName 
+    FROM employees 
+    WHERE employees.ReportsTo IS NULL;
+
+18. SELECT * FROM northwind.employees
+    WHERE ReportsTo=2;
